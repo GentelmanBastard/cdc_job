@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <GridPane fx:controller="sample.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <Label GridPane.rowIndex="0" text="Calculate CDC" alignment="TOP_CENTER" prefWidth="450"
@@ -13,12 +15,20 @@
     <HBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
         <TextField fx:id="date" text="Input date in format YYYY-MM-DD" prefWidth="300"/>
     </HBox>
-    <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
-        <Button fx:id="calculate" text="Calculate CDC" prefWidth="100" onAction="#onButtonClicked"/>
+    <HBox fx:id="CommandGroup" GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
+        <fx:define>
+            <ToggleGroup fx:id="change"/>
+        </fx:define>
+        <RadioButton fx:id="date_radio" text="Date" selected="true" toggleGroup="$change"/>
+        <RadioButton fx:id="cdc_radio" text="CDC" toggleGroup="$change"/>
+    </HBox>
+    <HBox GridPane.rowIndex="3" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
+        <Button fx:id="calculate_cdc" text="Calculate CDC" prefWidth="100" onAction="#onButtonClicked"/>
+        <Button fx:id="calculate_date" text="Calculate Date" prefWidth="100" onAction="#onButtonClicked"/>
         <Button fx:id="clear_input" text="Clear Input" prefWidth="100" onAction="#onButtonClicked"/>
         <Button fx:id="clear_log" text="Clear Log" prefWidth="100" onAction="#onButtonClicked"/>
     </HBox>
-    <HBox GridPane.rowIndex="3" GridPane.columnIndex="0" alignment="CENTER">
+    <HBox GridPane.rowIndex="4" GridPane.columnIndex="0" alignment="CENTER">
         <TextArea fx:id="log" prefWidth="200"/>
     </HBox>
 </GridPane>
