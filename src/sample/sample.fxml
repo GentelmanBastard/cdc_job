@@ -10,8 +10,8 @@
 <?import javafx.scene.control.ToggleGroup?>
 <GridPane fx:controller="sample.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <Label GridPane.rowIndex="0" text="Calculate CDC" alignment="TOP_CENTER" prefWidth="450"
-           style="-fx-border-color: green; -fx-border-style: dashed; -fx-font-family: 'Arial Black'; -fx-font-size: 32"/>
+    <Label GridPane.rowIndex="0" text="Calculate" alignment="TOP_CENTER" prefWidth="450"
+           style="-fx-font-family: 'Arial Black'; -fx-font-size: 32"/>
     <HBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
         <TextField fx:id="date" text="Input date in format YYYY-MM-DD" prefWidth="300"/>
     </HBox>
