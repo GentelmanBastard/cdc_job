@@ -34,21 +34,6 @@ public class Controller {
     @FXML
     private TextArea log;
 
-    private void logMessageToFile2(String message) {
-
-        FileWriter fstream = null;
-        try {
-            fstream = new FileWriter("out.txt");
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.append(message);
-            out.newLine();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void logMessageToFile(String message) {
 //        Dopytać Pana Wiewióra o chuj tu chodzi
         try {
