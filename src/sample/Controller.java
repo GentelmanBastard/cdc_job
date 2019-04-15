@@ -30,6 +30,7 @@ public class Controller {
 
     public void onButtonClicked() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Wrong date format. Should be YYYY-MM-DD");
+        Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Wrong input value and expected result");
         String date_string = date.getText();
         String startDate = "1992-10-01";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -52,8 +53,9 @@ public class Controller {
                 System.out.println(result);
                 log.appendText("Date: " + result.toString() + "\n");
             }catch (Exception e){}
-        }
-        else if (clear_input.isFocused()) {
+        } else if((calculate_cdc.isFocused() && cdc_radio.isFocused()) || (calculate_date.isFocused() && date_radio.isFocused())){
+            alert2.showAndWait();
+        } else if (clear_input.isFocused()) {
             date.clear();
         } else if (clear_log.isFocused()) {
             log.clear();
