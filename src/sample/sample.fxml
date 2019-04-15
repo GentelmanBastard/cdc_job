@@ -15,7 +15,7 @@
     <HBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
         <TextField fx:id="date" text="Input date in format YYYY-MM-DD" prefWidth="300"/>
     </HBox>
-    <HBox fx:id="CommandGroup" GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
+    <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
         <fx:define>
             <ToggleGroup fx:id="change"/>
         </fx:define>
