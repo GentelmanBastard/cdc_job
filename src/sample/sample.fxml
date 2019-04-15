@@ -1,0 +1,24 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextArea?>
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Label GridPane.rowIndex="0" text="Calculate CDC" alignment="TOP_CENTER" prefWidth="450"
+           style="-fx-border-color: green; -fx-border-style: dashed; -fx-font-family: 'Arial Black'; -fx-font-size: 32"/>
+    <HBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
+        <TextField fx:id="date" text="Input date in format YYYY-MM-DD" prefWidth="300"/>
+    </HBox>
+    <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
+        <Button fx:id="calculate" text="Calculate CDC" prefWidth="100" onAction="#onButtonClicked"/>
+        <Button fx:id="clear_input" text="Clear Input" prefWidth="100" onAction="#onButtonClicked"/>
+        <Button fx:id="clear_log" text="Clear Log" prefWidth="100" onAction="#onButtonClicked"/>
+    </HBox>
+    <HBox GridPane.rowIndex="3" GridPane.columnIndex="0" alignment="CENTER">
+        <TextArea fx:id="log" prefWidth="200"/>
+    </HBox>
+</GridPane>
