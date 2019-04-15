@@ -52,7 +52,7 @@ public class Controller {
     private void logMessageToFile(String message) {
 //        Dopytać Pana Wiewióra o chuj tu chodzi
         try {
-            File file = new File("out"+ LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            File file = new File("out"+ LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ".txt");
             if (!file.exists()){
                 Files.createFile(file.toPath());
             }
