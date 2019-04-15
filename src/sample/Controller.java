@@ -38,7 +38,6 @@ public class Controller {
         if (calculate_cdc.isFocused() && date_radio.isSelected()) {
             try {
                 LocalDate past_date = LocalDate.parse(date_string, formatter);
-//                LocalDate localDate = LocalDate.now();
                 long result = ChronoUnit.DAYS.between(start_date, past_date);
                 log.appendText("CDC: " + result + "\n");
             } catch (DateTimeParseException e) {
@@ -46,14 +45,15 @@ public class Controller {
                 date.clear();
                 date.requestFocus();
             }
-        } else if (calculate_date.isFocused() && cdc_radio.isFocused()){
+        } else if (calculate_date.isFocused() && cdc_radio.isSelected()){
             try{
                 int cdc = Integer.parseInt(date_string);
                 LocalDate result = start_date.plusDays(cdc);
-                System.out.println(result);
                 log.appendText("Date: " + result.toString() + "\n");
-            }catch (Exception e){}
-        } else if((calculate_cdc.isFocused() && cdc_radio.isFocused()) || (calculate_date.isFocused() && date_radio.isFocused())){
+            }catch (Exception e){
+                log.appendText("Error occured: " + e.getMessage());
+            }
+        } else if((calculate_cdc.isFocused() && cdc_radio.isSelected()) || (calculate_date.isFocused() && date_radio.isSelected())){
             alert2.showAndWait();
         } else if (clear_input.isFocused()) {
             date.clear();
