@@ -24,9 +24,7 @@ public class Controller {
     @FXML
     private RadioButton cdc_radio;
     @FXML
-    private Button calculate_cdc;
-    @FXML
-    private Button calculate_date;
+    private Button calculate;
     @FXML
     private Button clear_input;
     @FXML
@@ -45,7 +43,6 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void logMessage(String msg) {
@@ -53,36 +50,38 @@ public class Controller {
         log.appendText(msg);
     }
 
+    private void throwErrorAndClearInput(Alert alert){
+        alert.showAndWait();
+        date.clear();
+        date.requestFocus();
+    }
+
     public void onButtonClicked() {
         //        Dopytać Pana Wiewióra o chuj tu chodzi
         Alert alert_format = new Alert(Alert.AlertType.INFORMATION, "Wrong date format. Should be YYYY-MM-DD");
-        Alert alert_format_cdc = new Alert(Alert.AlertType.INFORMATION, "Wrong CDC format. Should be up to 5 digits");
-        Alert alert_value = new Alert(Alert.AlertType.INFORMATION, "Wrong input value and expected result");
+        Alert alert_format_cdc = new Alert(Alert.AlertType.INFORMATION, "Wrong CDC format. Should consist only of digits");
         String date_string = date.getText();
         String startDate = "1992-10-01";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate start_date = LocalDate.parse(startDate, formatter);
 
-        if (calculate_cdc.isFocused() && date_radio.isSelected()) {
+        if (calculate.isFocused() && cdc_radio.isSelected()) {
             try {
                 LocalDate past_date = LocalDate.parse(date_string, formatter);
                 long result = ChronoUnit.DAYS.between(start_date, past_date);
                 logMessage("CDC: " + result + "\n");
             } catch (DateTimeParseException e) {
-                alert_format.showAndWait();
-                date.clear();
-                date.requestFocus();
+                throwErrorAndClearInput(alert_format);
+
             }
-        } else if (calculate_date.isFocused() && cdc_radio.isSelected()) {
+        } else if (calculate.isFocused() && date_radio.isSelected()) {
             try {
                 int cdc = Integer.parseInt(date_string);
                 LocalDate result = start_date.plusDays(cdc);
                 logMessage("Date: " + result.toString() + "\n");
             } catch (NumberFormatException e) {
-                alert_format_cdc.showAndWait();
+                throwErrorAndClearInput(alert_format_cdc);
             }
-        } else if ((calculate_cdc.isFocused() && cdc_radio.isSelected()) || (calculate_date.isFocused() && date_radio.isSelected())) {
-            alert_value.showAndWait();
         } else if (clear_input.isFocused()) {
             date.clear();
         } else if (clear_log.isFocused()) {

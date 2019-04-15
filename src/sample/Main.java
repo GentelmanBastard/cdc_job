@@ -13,6 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("CDC Checker");
         primaryStage.setScene(new Scene(root, 700, 500));
+        root.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.show();
     }
 
