@@ -18,6 +18,10 @@ import java.time.temporal.ChronoUnit;
 
 public class Controller {
     @FXML
+    private TextField change_date_area;
+    @FXML
+    private Button change_date;
+    @FXML
     private TextField date;
     @FXML
     private RadioButton date_radio;
@@ -31,6 +35,22 @@ public class Controller {
     private Button clear_log;
     @FXML
     private TextArea log;
+
+    String startDate = "1992-10-01";
+    Alert alert_format = new Alert(Alert.AlertType.INFORMATION, "Wrong date format. Should be YYYY-MM-DD");
+    Alert alert_format_cdc = new Alert(Alert.AlertType.INFORMATION, "Wrong CDC format. Should consist only of digits");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private boolean changeStartDate(String date){
+        try {
+            startDate = date;
+            LocalDate start_date = LocalDate.parse(startDate, formatter).minusDays(1);
+            return true;
+        }catch(DateTimeParseException e){
+            throwErrorAndClearInput(alert_format);
+            change_date_area.clear();
+            return false;
+        }
+    }
 
     private void logMessageToFile(String message) {
 //        Dopytać Pana Wiewióra o chuj tu chodzi
@@ -50,6 +70,7 @@ public class Controller {
         log.appendText(msg);
     }
 
+
     private void throwErrorAndClearInput(Alert alert){
         alert.showAndWait();
         date.clear();
@@ -57,19 +78,21 @@ public class Controller {
     }
 
     public void onButtonClicked() {
+        if(change_date.isFocused() && (change_date_area.getText() != null)){
+            if(!changeStartDate(change_date_area.getText())){
+                return;
+            }
+        }
         //        Dopytać Pana Wiewióra o chuj tu chodzi
-        Alert alert_format = new Alert(Alert.AlertType.INFORMATION, "Wrong date format. Should be YYYY-MM-DD");
-        Alert alert_format_cdc = new Alert(Alert.AlertType.INFORMATION, "Wrong CDC format. Should consist only of digits");
+
         String date_string = date.getText();
-        String startDate = "1992-10-01";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate start_date = LocalDate.parse(startDate, formatter);
+        LocalDate start_date = LocalDate.parse(startDate, formatter).minusDays(1);
 
         if (calculate.isFocused() && cdc_radio.isSelected()) {
             try {
                 LocalDate past_date = LocalDate.parse(date_string, formatter);
                 long result = ChronoUnit.DAYS.between(start_date, past_date);
-                logMessage("CDC: " + result + "\n");
+                logMessage("Input of date: " + date_string + " corresponds to CDC: " + result + "\n");
             } catch (DateTimeParseException e) {
                 throwErrorAndClearInput(alert_format);
 
@@ -78,7 +101,7 @@ public class Controller {
             try {
                 int cdc = Integer.parseInt(date_string);
                 LocalDate result = start_date.plusDays(cdc);
-                logMessage("Date: " + result.toString() + "\n");
+                logMessage("Input of CDC: " + date_string + " corresponds to date: " + result.toString() + "\n");
             } catch (NumberFormatException e) {
                 throwErrorAndClearInput(alert_format_cdc);
             }

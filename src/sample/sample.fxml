@@ -12,6 +12,10 @@
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <Label GridPane.rowIndex="0" text="Calculate" alignment="TOP_CENTER" prefWidth="450"
            style="-fx-font-family: 'Arial Black'; -fx-text-fill: white ; -fx-font-size: 32"/>
+    <TextField fx:id="change_date_area" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_RIGHT"
+            text="Input start date" maxWidth="100"/>
+    <Button fx:id="change_date" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_RIGHT"
+            text="Change start date" onAction="#onButtonClicked"/>
     <HBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" spacing="10">
         <TextField fx:id="date" text="Input date in format YYYY-MM-DD or CDC" prefWidth="300"/>
     </HBox>
